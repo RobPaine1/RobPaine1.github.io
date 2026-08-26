@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <title>Hi! I'm Rob.</title>
 <style>
+  /* The page content sits in a centered column, but text inside reads left-aligned */
+  body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left;
+  }
+  /* Keep the photo and main greeting centered */
+  #top {
+    text-align: center;
+  }
   /* Only the wombat gets styling — everything else stays default */
   #wombat-zone {
     position: relative;
@@ -23,10 +34,10 @@
   }
   /* The wombat faces left, so flip it when it travels right */
   @keyframes roam {
-    0%    { transform: translateX(0) scaleX(-1); }
-    49.9% { transform: translateX(calc(100vw - 240px)) scaleX(-1); }
-    50%   { transform: translateX(calc(100vw - 240px)) scaleX(1); }
-    100%  { transform: translateX(0) scaleX(1); }
+    0%    { left: 0; transform: scaleX(-1); }
+    49.9% { left: calc(100% - 220px); transform: scaleX(-1); }
+    50%   { left: calc(100% - 220px); transform: scaleX(1); }
+    100%  { left: 0; transform: scaleX(1); }
   }
   @keyframes hop {
     0%, 100% { transform: translateY(0); }
@@ -39,36 +50,28 @@
 </head>
 <body>
 
+<div id="top">
 <img src="rob.jpg" alt="Photo of Rob" width="250">
 
 <h1>Hi! I'm Rob. This is my website.</h1>
+</div>
 
 <h2>Things I Have Done:</h2>
+
+<h3>Community building for <a href="https://www.nest-ea.org/">NEST</a> (Network for EA Support and Training):</h3>
 <ul>
-  <li>Community builder for NEST.
-    <ul>
-      <li>I'm helping universities in the DC area run their EA groups.</li>
-    </ul>
-  </li>
-  <li>Contracted for <a href="https://80000hours.org">80,000 Hours</a>, a nonprofit advising people who want to have high impact careers (currently focusing on risks from AI).
-    <ul>
-      <li>Job Board
-        <ul>
-          <li>On the Job Board I helped source new roles and opportunities. I also suggested product improvements based on user data.</li>
-        </ul>
-      </li>
-      <li>Advising
-        <ul>
-          <li>On the Advising department I helped filter applicants for 80K advising.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Co-organized the Effective Altruism group at UT Austin from 2023 to 2026.
-    <ul>
-      <li>Organized weekly meetings and ran an intro fellowship.</li>
-    </ul>
-  </li>
+  <li>I'm helping universities in the DC area run their Effective Altruism groups, primarily Georgetown.</li>
+</ul>
+
+<h3>Contracting for <a href="https://80000hours.org">80,000 Hours</a>, a nonprofit advising people who want to have high impact careers (currently focusing on risks from AI):</h3>
+<ul>
+  <li>I found new jobs and opportunities for the 80,000 Hours <a href="https://jobs.80000hours.org/">Job Board</a> on a weekly basis while maintaining sourcing automation pipelines. I also suggested and got through some product improvements.</li>
+  <li>I filtered applicants for 80,000 Hours <a href="https://80000hours.org/speak-with-us/?cs740_header_experiment=1/">Advising</a> in collaboration with the advising department.</li>
+</ul>
+
+<h3>Co-organizing <a href="https://www.eautexas.org/">Effective Altruism at UT Austin</a>:</h3>
+<ul>
+  <li>I organized weekly meetups and socials, including faculty guest speakers. I took care of a lot of marketing tasks like tabling, posters and social media. I also ran an Introductory Effective Altruism fellowship and contributed to our annual retreats.</li>
 </ul>
 
 <h2>Ways to Get Into Contact With Me:</h2>
@@ -80,10 +83,17 @@
   <li>Instagram: <a href="https://instagram.com/robpaine4">@robpaine4</a></li>
 </ul>
 
-<h2>Interests You Can Use To Strike A Conversation With Me:</h2>
+<h2>Interests You Can Use to Strike a Conversation With Me:</h2>
 <ul>
-  <li>Marvel Cinematic Universe Movies</li>
+  <li>Marvel Cinematic Universe movies</li>
   <li>Star Wars</li>
+  <li>Tottenham Hotspur</li>
+  <li>Rock music</li>
+</ul>
+
+<h2>Leave Me Feedback Here!:</h2>
+<ul>
+  <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
 </ul>
 
 <div id="wombat-zone">
