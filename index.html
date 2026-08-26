@@ -3,6 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Hi! I'm Rob.</title>
+<style>
+  /* Only the wombat gets styling — everything else stays default */
+  #wombat-zone {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    margin-top: 60px;
+  }
+  #wombat-roam {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: roam 14s linear infinite;
+  }
+  #wombat-roam img {
+    display: block;
+    animation: hop 0.5s ease-in-out infinite;
+  }
+  /* The wombat faces left, so flip it when it travels right */
+  @keyframes roam {
+    0%    { transform: translateX(0) scaleX(-1); }
+    49.9% { transform: translateX(calc(100vw - 240px)) scaleX(-1); }
+    50%   { transform: translateX(calc(100vw - 240px)) scaleX(1); }
+    100%  { transform: translateX(0) scaleX(1); }
+  }
+  @keyframes hop {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-35px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #wombat-roam, #wombat-roam img { animation: none; }
+  }
+</style>
 </head>
 <body>
 
@@ -52,6 +85,12 @@
   <li>Marvel Cinematic Universe Movies</li>
   <li>Star Wars</li>
 </ul>
+
+<div id="wombat-zone">
+  <div id="wombat-roam">
+    <img src="wombat.png" alt="A wombat hopping back and forth" width="220">
+  </div>
+</div>
 
 </body>
 </html>
