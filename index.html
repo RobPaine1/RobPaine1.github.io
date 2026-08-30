@@ -19,7 +19,6 @@
   #wombat-zone {
     position: relative;
     height: 200px;
-    overflow: hidden;
     margin-top: 60px;
   }
   #wombat-roam {
@@ -28,23 +27,73 @@
     left: 0;
     animation: roam 14s linear infinite;
   }
-  #wombat-roam img {
+  /* The flip lives on its own wrapper so the hover card above never mirrors */
+  #wombat-flip {
+    animation: face 14s linear infinite;
+  }
+  #wombat-flip img {
     display: block;
     animation: hop 0.5s ease-in-out infinite;
   }
-  /* The wombat faces left, so flip it when it travels right */
+  /* Hovering the wombat (or its card) freezes everything mid-hop */
+  #wombat-roam:hover,
+  #wombat-roam:hover #wombat-flip,
+  #wombat-roam:hover img {
+    animation-play-state: paused;
+  }
   @keyframes roam {
-    0%    { left: 0; transform: scaleX(-1); }
-    49.9% { left: calc(100% - 220px); transform: scaleX(-1); }
-    50%   { left: calc(100% - 220px); transform: scaleX(1); }
-    100%  { left: 0; transform: scaleX(1); }
+    0%   { left: 0; }
+    50%  { left: calc(100% - 220px); }
+    100% { left: 0; }
+  }
+  /* The wombat faces left, so flip it when it travels right */
+  @keyframes face {
+    0%, 49.9% { transform: scaleX(-1); }
+    50%, 100% { transform: scaleX(1); }
   }
   @keyframes hop {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-35px); }
   }
+  /* Wikipedia preview card, hidden until the wombat is hovered.
+     The transparent padding-bottom bridges the gap so the mouse can
+     travel from wombat to card without the card vanishing. */
+  #wombat-card {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+  }
+  #wombat-roam:hover #wombat-card {
+    visibility: visible;
+    opacity: 1;
+  }
+  #wombat-card-inner {
+    width: 300px;
+    background: #fff;
+    border: 1px solid #a2a9b1;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    padding: 12px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  #wombat-card-inner img {
+    float: right;
+    width: 90px;
+    border-radius: 4px;
+    margin: 0 0 6px 10px;
+  }
+  #wombat-card-inner p {
+    margin: 6px 0;
+  }
   @media (prefers-reduced-motion: reduce) {
-    #wombat-roam, #wombat-roam img { animation: none; }
+    #wombat-roam, #wombat-flip, #wombat-flip img { animation: none; }
   }
 </style>
 </head>
@@ -100,9 +149,52 @@
 
 <div id="wombat-zone">
   <div id="wombat-roam">
-    <img src="wombat.png" alt="A wombat hopping back and forth" width="220">
+    <div id="wombat-card">
+      <div id="wombat-card-inner">
+        <img id="wombat-card-img" alt="" hidden>
+        <strong id="wombat-card-title">Wombat</strong>
+        <p id="wombat-card-text">Loading a preview from Wikipedia&hellip;</p>
+        <a href="https://en.wikipedia.org/wiki/Wombat" target="_blank" rel="noopener">Read more on Wikipedia &rarr;</a>
+      </div>
+    </div>
+    <div id="wombat-flip">
+      <img src="wombat.png" alt="A wombat hopping back and forth" width="220">
+    </div>
   </div>
 </div>
+
+<script>
+(function () {
+  var card = document.getElementById('wombat-card');
+  var roam = document.getElementById('wombat-roam');
+
+  // Fill the card with the real Wikipedia summary (falls back to the static text)
+  fetch('https://en.wikipedia.org/api/rest_v1/page/summary/Wombat')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.extract) document.getElementById('wombat-card-text').textContent = d.extract;
+      if (d.thumbnail && d.thumbnail.source) {
+        var img = document.getElementById('wombat-card-img');
+        img.src = d.thumbnail.source;
+        img.hidden = false;
+      }
+    })
+    .catch(function () {
+      document.getElementById('wombat-card-text').textContent =
+        'Wombats are short-legged, muscular marsupials native to Australia.';
+    });
+
+  // Keep the card on screen when the wombat pauses near an edge
+  roam.addEventListener('mouseenter', function () {
+    card.style.transform = 'translateX(-50%)';
+    var rect = card.getBoundingClientRect();
+    var shift = 0;
+    if (rect.left < 8) shift = 8 - rect.left;
+    else if (rect.right > window.innerWidth - 8) shift = window.innerWidth - 8 - rect.right;
+    if (shift) card.style.transform = 'translateX(calc(-50% + ' + shift + 'px))';
+  });
+})();
+</script>
 
 </body>
 </html>
