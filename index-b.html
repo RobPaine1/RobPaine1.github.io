@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hi! I'm Rob.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111113;
+    --panel: #1a1a1e;
+    --ink: #f5f5f2;
+    --muted: #9a9aa3;
+    --coral: #ff5c6c;
+    --cyan: #2ec4f1;
+    --yellow: #ffd23f;
+    --violet: #8a5cff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 500; line-height: 1.55;
+    overflow-x: hidden;
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--yellow); }
+  a:hover { color: var(--yellow); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0; font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  nav .brand { font-weight: 700; display: flex; align-items: center; gap: 12px; }
+  nav .brand::before { content: ""; width: 14px; height: 14px; background: var(--coral); transform: rotate(45deg); }
+  nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+  nav ul a { border: 0; color: var(--muted); }
+  nav ul a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; align-items: end;
+    min-height: min(78vh, 720px); padding: 40px 0 60px; border-bottom: 2px solid var(--ink);
+  }
+  .hero h1 {
+    margin: 0 0 24px; font-size: clamp(56px, 10vw, 148px); font-weight: 700;
+    line-height: 0.92; letter-spacing: -0.02em; text-transform: uppercase;
+  }
+  .hero h1 .ghost { color: transparent; -webkit-text-stroke: 2px var(--ink); font-weight: 300; }
+  .hero h1 .pop { color: var(--yellow); }
+  .hero p { max-width: 440px; font-size: 19px; color: var(--muted); margin: 0 0 36px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px;
+    background: var(--ink); color: var(--bg); border: 0; font-weight: 700; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .btn::after { content: "\2192"; font-size: 20px; }
+  .btn:hover { background: var(--coral); color: var(--ink); }
+
+  .portrait { position: relative; justify-self: end; width: min(100%, 440px); aspect-ratio: 1; }
+  .portrait .quarter {
+    position: absolute; right: 0; top: 0; width: 72%; height: 72%;
+    background: var(--yellow); border-radius: 0 100% 0 0;
+  }
+  .portrait img {
+    position: absolute; left: 6%; bottom: 0; width: 70%; aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+    filter: grayscale(1) contrast(1.1); border: 6px solid var(--bg);
+  }
+  .portrait img:hover { filter: none; }
+  .shape { position: absolute; pointer-events: none; }
+  .ring { width: 96px; height: 96px; border-radius: 50%; border: 10px solid var(--cyan); right: -40px; bottom: 60px; }
+  .x { left: -30px; top: 30px; width: 64px; height: 64px; }
+  .x::before, .x::after { content: ""; position: absolute; left: 50%; top: 50%; width: 100%; height: 12px; background: var(--coral); transform: translate(-50%, -50%) rotate(45deg); }
+  .x::after { transform: translate(-50%, -50%) rotate(-45deg); }
+  .tri { right: 20%; top: -30px; width: 0; height: 0; border-left: 22px solid transparent; border-right: 22px solid transparent; border-bottom: 38px solid var(--violet); }
+  .grid-dots { left: 0; top: 0; width: 180px; height: 100px; background-image: radial-gradient(#3a3a40 2.5px, transparent 3px); background-size: 20px 20px; }
+  .bars { right: 0; top: 0; display: flex; gap: 8px; }
+  .bars i { width: 5px; height: 48px; background: var(--ink); display: block; }
+  .bars i:nth-child(4) { background: var(--cyan); }
+  .scroll { left: -44px; bottom: 20px; writing-mode: vertical-rl; letter-spacing: 0.5em; font-size: 12px; text-transform: uppercase; color: var(--muted); }
+  .scroll::before { content: ""; display: inline-block; width: 2px; height: 60px; background: var(--muted); margin-bottom: 16px; }
+
+  /* ---------- sections ---------- */
+  section { display: grid; grid-template-columns: 260px 1fr; gap: 48px; padding: 72px 0; border-bottom: 2px solid #2a2a2f; }
+  section h2 { margin: 0; font-size: 26px; font-weight: 700; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.02em; }
+  section h2 i { display: block; width: 44px; height: 8px; margin-top: 14px; }
+  section:nth-of-type(1) h2 i { background: var(--coral); }
+  section:nth-of-type(2) h2 i { background: var(--cyan); }
+  section:nth-of-type(3) h2 i { background: var(--violet); }
+  section:nth-of-type(4) h2 i { background: var(--yellow); }
+  .entry { padding: 22px 0; border-top: 1px solid #2a2a2f; }
+  .entry:first-child { border-top: 0; padding-top: 0; }
+  .entry h3 { margin: 0 0 10px; font-size: 20px; font-weight: 500; }
+  .entry h3 small { display: block; color: var(--muted); font-size: 15px; font-weight: 500; margin-top: 2px; }
+  .entry ul { margin: 0; padding-left: 20px; color: #d6d6d2; }
+  .entry li { margin-bottom: 8px; }
+  .contact ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 40px; font-size: 18px; }
+  .contact li span { display: block; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .contact p { margin: 0 0 24px; color: var(--muted); }
+  .interests ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .interests li { padding: 18px 20px; background: var(--panel); font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .interests li:nth-child(1) { border-left: 8px solid var(--coral); }
+  .interests li:nth-child(2) { border-left: 8px solid var(--cyan); }
+  .interests li:nth-child(3) { border-left: 8px solid var(--violet); }
+  .interests li:nth-child(4) { border-left: 8px solid var(--yellow); }
+
+  /* ---------- wombat ---------- */
+  #wombat-zone { position: relative; height: 200px; margin-top: 60px; }
+  #wombat-roam { position: absolute; bottom: 0; left: 0; animation: roam 14s linear infinite; }
+  #wombat-flip { animation: face 14s linear infinite; }
+  #wombat-flip img { display: block; animation: hop 0.5s ease-in-out infinite; }
+  #wombat-roam:hover, #wombat-roam:hover #wombat-flip, #wombat-roam:hover img { animation-play-state: paused; }
+  @keyframes roam { 0% { left: 0; } 50% { left: calc(100% - 220px); } 100% { left: 0; } }
+  @keyframes face { 0%, 49.9% { transform: scaleX(-1); } 50%, 100% { transform: scaleX(1); } }
+  @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-35px); } }
+  #wombat-card { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); padding-bottom: 10px; visibility: hidden; opacity: 0; transition: opacity 0.15s; z-index: 10; }
+  #wombat-roam:hover #wombat-card { visibility: visible; opacity: 1; }
+  #wombat-card-inner { width: 300px; background: var(--panel); border: 2px solid var(--ink); padding: 12px 14px; font-size: 14px; line-height: 1.4; }
+  #wombat-card-inner img { float: right; width: 90px; margin: 0 0 6px 10px; }
+  #wombat-card-inner p { margin: 6px 0; }
+  @media (prefers-reduced-motion: reduce) { #wombat-roam, #wombat-flip, #wombat-flip img { animation: none; } }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .portrait { justify-self: start; margin-top: 40px; }
+    .scroll, .ring, .grid-dots { display: none; }
+    section { grid-template-columns: 1fr; gap: 20px; }
+    .contact ul, .interests ul { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <span class="brand">Rob Paine</span>
+  <ul>
+    <li><a href="#top">Home</a></li>
+    <li><a href="#done">Things</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <span class="shape grid-dots"></span>
+  <span class="shape bars"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <div>
+    <h1><span class="ghost">Hi!</span><br>I'm <span class="pop">Rob.</span></h1>
+    <p>This is my website. I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+  <div class="portrait">
+    <span class="quarter"></span>
+    <span class="shape tri"></span>
+    <span class="shape x"></span>
+    <img src="rob.jpg" alt="Photo of Rob">
+    <span class="shape ring"></span>
+  </div>
+  <span class="shape scroll">Scroll</span>
+</header>
+
+<section id="done">
+  <h2>Things I have done<i></i></h2>
+  <div>
+    <div class="entry">
+      <h3>Community building for <a href="https://www.nest-ea.org/">NEST</a><small>Network for EA Support and Training</small></h3>
+      <ul><li>I'm helping universities in the DC area run their Effective Altruism groups, primarily Georgetown.</li></ul>
+    </div>
+    <div class="entry">
+      <h3>Contracting for <a href="https://80000hours.org">80,000 Hours</a><small>A nonprofit advising people who want high-impact careers, currently focused on risks from AI</small></h3>
+      <ul>
+        <li>I found new jobs and opportunities for the 80,000 Hours <a href="https://jobs.80000hours.org/">Job Board</a> on a weekly basis while maintaining sourcing automation pipelines. I also suggested and got through some product improvements.</li>
+        <li>I filtered applicants for 80,000 Hours <a href="https://80000hours.org/speak-with-us/?cs740_header_experiment=1/">Advising</a> in collaboration with the advising department.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <h3>Co-organizing <a href="https://www.eautexas.org/">Effective Altruism at UT Austin</a></h3>
+      <ul><li>I organized weekly meetups and socials, including faculty guest speakers. I took care of a lot of marketing tasks like tabling, posters and social media. I also ran an Introductory Effective Altruism fellowship and contributed to our annual retreats.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Ways to get into contact with me<i></i></h2>
+  <div>
+    <ul>
+      <li><span>Email</span><a href="mailto:robdpaine@icloud.com">robdpaine@icloud.com</a></li>
+      <li><span>Text</span><a href="sms:+15126292480">512-629-2480</a></li>
+      <li><span>Calendly</span><a href="https://calendly.com/robdpaine/1-1-meeting-1">Book a 1:1 with me</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/robertdpaine/">robertdpaine</a></li>
+      <li><span>Instagram</span><a href="https://instagram.com/robpaine4">@robpaine4</a></li>
+      <li><span>Letterboxd</span><a href="https://letterboxd.com/robpaine4/">@robpaine4</a> (see what I've watched recently)</li>
+    </ul>
+  </div>
+</section>
+
+<section class="interests">
+  <h2>Interests you can use to strike a conversation with me<i></i></h2>
+  <ul>
+    <li>Marvel Cinematic Universe movies</li>
+    <li>Star Wars</li>
+    <li>Tottenham Hotspur</li>
+    <li>Rock music</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Leave me feedback here<i></i></h2>
+  <p style="font-size:20px;margin:0"><a href="https://www.admonymous.co/rob-paine">Admonymous</a></p>
+</section>
+
+<div id="wombat-zone">
+  <div id="wombat-roam">
+    <div id="wombat-card">
+      <div id="wombat-card-inner">
+        <img id="wombat-card-img" alt="" hidden>
+        <strong id="wombat-card-title">Wombat</strong>
+        <p id="wombat-card-text">Loading a preview from Wikipedia&hellip;</p>
+        <a href="https://en.wikipedia.org/wiki/Wombat" target="_blank" rel="noopener">Read more on Wikipedia &rarr;</a>
+      </div>
+    </div>
+    <div id="wombat-flip">
+      <img src="wombat.png" alt="A wombat hopping back and forth" width="220">
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="wombat.js"></script>
+</body>
+</html>
