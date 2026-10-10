@@ -63,6 +63,19 @@
     margin-top: 3px;
     color: #444;
   }
+  /* Small live lines under the interests (Spurs fixture, now playing) */
+  .live {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-top: 2px;
+  }
+  .live:empty { display: none; }
+  #last-updated {
+    font-size: 13px;
+    color: #777;
+    margin-top: 40px;
+  }
   /* Calendly's inline widget */
   .calendly-inline-widget {
     min-width: 320px;
@@ -208,14 +221,16 @@
 <ul>
   <li>Marvel Cinematic Universe movies</li>
   <li>Star Wars</li>
-  <li>Tottenham Hotspur</li>
-  <li>Rock music</li>
+  <li>Tottenham Hotspur <span class="live" id="spurs"></span></li>
+  <li>Rock music <span class="live" id="lastfm"></span></li>
 </ul>
 
 <h2>Leave Me Feedback Here!:</h2>
 <ul>
   <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
 </ul>
+
+<p id="last-updated"></p>
 
 <div id="wombat-zone">
   <div id="wombat-roam">
@@ -262,6 +277,60 @@
       });
     })
     .catch(function () { list.remove(); });
+})();
+
+// Spurs: next fixture and last result, from data/spurs.json
+(function () {
+  var el = document.getElementById('spurs');
+  var SPURS = 'Tottenham Hotspur';
+  function short(name) { return name === SPURS ? 'Spurs' : name; }
+  fetch('data/spurs.json')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      var bits = [];
+      if (d.last) {
+        var home = d.last.home === SPURS, us = home ? d.last.homeScore : d.last.awayScore, them = home ? d.last.awayScore : d.last.homeScore;
+        var verdict = us > them ? 'Won' : us < them ? 'Lost' : 'Drew';
+        bits.push(verdict + ' ' + us + '\u2013' + them + ' vs ' + short(home ? d.last.away : d.last.home) + (home ? ' (H)' : ' (A)'));
+      }
+      if (d.next) {
+        var h = d.next.home === SPURS, when = new Date(d.next.kickoff);
+        var day = when.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+        var time = when.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+        bits.push('Next: ' + short(h ? d.next.away : d.next.home) + (h ? ' (H)' : ' (A)') + ', ' + day + ' ' + time);
+      }
+      el.textContent = bits.join(' \u00b7 ');
+    })
+    .catch(function () {});
+})();
+
+// Last.fm: most recent track, from data/lastfm.json (only exists once the secrets are set)
+(function () {
+  var el = document.getElementById('lastfm');
+  fetch('data/lastfm.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (d) {
+      var t = d.tracks && d.tracks[0];
+      if (!t) return;
+      var a = document.createElement('a');
+      a.href = t.url;
+      a.textContent = t.track + ' \u2014 ' + t.artist;
+      el.textContent = (t.nowPlaying ? 'Now playing: ' : 'Last played: ');
+      el.appendChild(a);
+    })
+    .catch(function () {});
+})();
+
+// Last updated: date of the latest commit touching this page, via the public GitHub API
+(function () {
+  var el = document.getElementById('last-updated');
+  function show(date) {
+    el.textContent = 'Last updated ' + date.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
+  }
+  fetch('https://api.github.com/repos/RobPaine1/RobPaine1.github.io/commits?path=index.html&per_page=1')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (c) { show(new Date(c[0].commit.committer.date)); })
+    .catch(function () { show(new Date(document.lastModified)); });
 })();
 
 (function () {

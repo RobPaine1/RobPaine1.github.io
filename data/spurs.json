@@ -1,0 +1,19 @@
+{
+  "next": {
+    "home": "Manchester United",
+    "away": "Tottenham Hotspur",
+    "kickoff": "2026-10-10T16:30:00Z",
+    "competition": "English Premier League",
+    "venue": "Old Trafford"
+  },
+  "last": {
+    "home": "Tottenham Hotspur",
+    "away": "Aston Villa",
+    "homeScore": 2,
+    "awayScore": 3,
+    "date": "2026-09-19",
+    "competition": "English Premier League"
+  },
+  "source": "thesportsdb",
+  "updated": "2026-10-10T17:17:22+00:00"
+}

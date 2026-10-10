@@ -1,4 +1,7 @@
-name: Update Letterboxd data
+name: Update live data
+
+# Fetches the feeds the page renders (Letterboxd, Spurs fixtures, Last.fm)
+# and commits the JSON under data/ when anything changed.
 
 on:
   schedule:
@@ -15,19 +18,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch feed
+      - name: Letterboxd
         run: python3 scripts/fetch_letterboxd.py
+
+      - name: Spurs fixtures
+        run: python3 scripts/fetch_spurs.py
+
+      - name: Last.fm (skipped until LASTFM_API_KEY and LASTFM_USER secrets exist)
+        env:
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_USER: ${{ secrets.LASTFM_USER }}
+        run: python3 scripts/fetch_lastfm.py
 
       - name: Commit if changed
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/letterboxd.json
+          git add data/
           if git diff --staged --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Update Letterboxd data"
+            git commit -m "Update live data"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
