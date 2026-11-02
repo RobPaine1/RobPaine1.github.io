@@ -95,6 +95,20 @@
   @media (prefers-reduced-motion: reduce) {
     #wombat-roam, #wombat-flip, #wombat-flip img { animation: none; }
   }
+  /* Contact list: each service's logo replaces the bullet */
+  #contact-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  #contact-list li {
+    margin: 8px 0;
+  }
+  .contact-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+    margin-right: 7px;
+  }
 </style>
 </head>
 <body>
@@ -125,13 +139,13 @@
 
 <h2>Ways to Get Into Contact With Me:</h2>
 <p>I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
-<ul>
-  <li>Email: <a href="mailto:robdpaine@icloud.com">robdpaine@icloud.com</a></li>
-  <li>Text: <a href="sms:+15126292480">512-629-2480</a></li>
-  <li><a href="https://calendly.com/robdpaine/1-1-meeting-1">Book a 1:1 with me on Calendly!</a></li>
-  <li>LinkedIn: <a href="https://www.linkedin.com/in/robertdpaine/">robertdpaine</a></li>
-  <li>Instagram: <a href="https://instagram.com/robpaine4">@robpaine4</a></li>
-  <li>Letterboxd: <a href="https://letterboxd.com/robpaine4/">@robpaine4</a> (see what I've watched recently)</li>
+<ul id="contact-list">
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#1D9BF6" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>Email: <a href="mailto:robdpaine@icloud.com">robdpaine@icloud.com</a></li>
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#34C759" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>Text: <a href="sms:+15126292480">512-629-2480</a></li>
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#006BFF" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg><a href="https://calendly.com/robdpaine/1-1-meeting-1">Book a 1:1 with me on Calendly!</a></li>
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#0A66C2" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>LinkedIn: <a href="https://www.linkedin.com/in/robertdpaine/">robertdpaine</a></li>
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#E4405F" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.3" cy="6.7" r="1" fill="#E4405F" stroke="none"/></svg>Instagram: <a href="https://instagram.com/robpaine4">@robpaine4</a></li>
+  <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6.5" cy="12" r="4.8" fill="#FF8000"/><circle cx="12" cy="12" r="4.8" fill="#00E054"/><circle cx="17.5" cy="12" r="4.8" fill="#40BCF4"/></svg>Letterboxd: <a href="https://letterboxd.com/robpaine4/">@robpaine4</a> (see what I've watched recently)</li>
 </ul>
 
 <h2>Interests You Can Use to Strike a Conversation With Me:</h2>
