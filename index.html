@@ -12,20 +12,35 @@
 <meta property="og:image" content="https://robpaine1.github.io/rob.jpg">
 <meta name="twitter:card" content="summary">
 <style>
-  /* Phones and narrow windows: one centered column that scrolls */
+  /* One centered column that scrolls, at every window size */
   body {
-    max-width: 700px;
+    max-width: 46rem;
     margin: 0 auto;
-    padding: 0 20px;
-    text-align: left;
+    padding: 0 20px 2rem;
+    line-height: 1.5;
+  }
+  main > section {
+    margin-top: 4rem;
+  }
+  h2 {
+    margin: 0 0 1rem;
+  }
+  li {
+    margin: 0.3em 0;
   }
   /* Keep the photo and main greeting centered */
   #top {
+    margin-top: 2.5rem;
     text-align: center;
   }
   #top img {
     max-width: 100%;
     height: auto;
+  }
+  #top p {
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
   }
   #wombat-zone {
     --wombat-w: 220px;
@@ -134,77 +149,60 @@
     max-width: 24rem;
     height: auto;
   }
+  .split-photo {
+    margin-bottom: 1rem;
+  }
+  .split-text > :first-child {
+    margin-top: 0;
+  }
   #long-hair {
-    margin: 1em 0;
+    margin: 1.5rem 0 0;
   }
   #long-hair figcaption {
     font-style: italic;
     margin-top: 0.3em;
   }
-  /* Wide windows: four columns that fit one screen without scrolling.
-     Everything is sized in rem and the root font size follows the window,
-     so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1125px
-     breakpoint is the full 85rem layout (plus the page margin) at that
-     floor, so the columns are never squeezed narrower than designed. The
-     column widths are tuned so the columns end up about the same height;
-     re-measure them when the text changes. */
-  @media (min-width: 1125px) {
+  #feedback {
+    text-align: center;
+  }
+  /* Wider windows: each section's photo sits beside its text, alternating
+     sides down the page. On phones the photo stacks under the heading. */
+  @media (min-width: 700px) {
     html {
-      font-size: clamp(13px, min(1.135vw, 2.02vh), 22px);
+      font-size: 18px;
     }
-    body {
-      box-sizing: border-box;
-      max-width: 85rem;
-      min-height: 100vh;
-      padding: 0 1.25rem;
-      display: flex;
-      flex-direction: column;
-    }
-    /* The feedback link comes last in the page (and on phones) but sits
-       under the intro here, filling the short left column */
-    #layout {
+    .split {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 36fr) minmax(0, 16.75fr) minmax(0, 15.25fr);
-      grid-template-rows: auto 1fr;
-      grid-template-areas:
-        "top      about animals side"
-        "feedback about animals side";
-      column-gap: 2rem;
+      grid-template-columns: minmax(0, 1fr) 16rem;
+      column-gap: 2.5rem;
       align-items: start;
-      margin: auto 0;
     }
-    #top { grid-area: top; }
-    #about { grid-area: about; }
-    #animals { grid-area: animals; }
-    #side { grid-area: side; }
-    #feedback {
-      grid-area: feedback;
-      text-align: center;
+    .split > .split-text {
+      grid-column: 1;
+      grid-row: 1;
     }
-    #feedback ul {
-      list-style: none;
-      padding-left: 0;
+    .split > .split-photo {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0.3rem 0 0;
     }
-    /* The table photo sits beside the text so the tall middle column
-       doesn't grow by the photo's full height */
-    #ea .section-photo { float: right; width: 11rem; margin: 0.25rem 0 0.5rem 1rem; }
-    #top img {
-      width: 12rem;
+    .split.photo-left {
+      grid-template-columns: 16rem minmax(0, 1fr);
     }
-    #wombat-zone {
-      --wombat-w: 8.5rem;
-      --hop: 1.3rem;
-      flex: none;
-      height: 6.8rem;
-      margin-top: 0;
+    .split.photo-left > .split-text { grid-column: 2; }
+    .split.photo-left > .split-photo { grid-column: 1; }
+    #side .split {
+      grid-template-columns: minmax(0, 1fr) 13rem;
+    }
+    #side .split > #long-hair {
+      margin-top: 0.3rem;
     }
   }
 </style>
 </head>
 <body>
 
-<main id="layout">
+<main>
 
 <section id="top">
 <img src="rob-cutout.webp" alt="Photo of Rob" width="250" height="234">
@@ -214,10 +212,27 @@
 <p>There's a lot to do! Check out the <a href="https://jobs.80000hours.org/">80k job board</a>.</p>
 </section>
 
-<div id="about">
+<section id="ai-safety">
+<h2>AI Safety:</h2>
+<p>I work in AI safety fieldbuilding, because I truly believe that the stakes for AI are existential. I think it is still an underappreciated fact that:</p>
+<ol>
+  <li>AI companies do not know how to stop their current AI models from going rogue (see: <a href="https://www.youtube.com/watch?v=xFYUo0ZmK-A">the Hugging Face incident</a>)</li>
+  <li>AI companies are spending hundreds of billions of dollars to make those same models more capable. They are attempting to automate AI research (recursive self improvement) and are praying that somewhere along the way they will figure out how to stop the models from going rogue.</li>
+</ol>
+<p>I think this is very uncool of them. If it is possible to make AI systems that are smarter than humans in every way, we should not create them unless there is broad scientific consensus they will be safe.</p>
+<p>Here are some of my favorite resources on AI Safety:</p>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=xFYUo0ZmK-A">This might be the worst AI warning we get.</a> by AI In Context</li>
+  <li><a href="https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot">AI Safety Is Not A Corporate Plot</a> by Scott Alexander</li>
+  <li><a href="https://80000hours.org/problem-profiles/artificial-intelligence">Why AI risks are the world&rsquo;s most pressing problems</a> from 80,000 Hours</li>
+</ul>
+</section>
+
 <section id="ea">
 <h2>Effective Altruism:</h2>
-<img class="section-photo" src="ea-table.webp" alt="Me at the Effective Altruism table at UT Austin" width="760" height="757">
+<div class="split">
+<img class="section-photo split-photo" src="ea-table.webp" alt="Me at the Effective Altruism table at UT Austin" width="760" height="757">
+<div class="split-text">
 <p>I'm quite involved in the Effective Altruism community. I co-organized <a href="https://www.eautexas.org/">UT Austin's Effective Altruism group</a> for two years and I briefly worked for <a href="https://www.nest-ea.org/">NEST</a> (The Network for EA Support and Training).</p>
 <p>For me the central question of Effective Altruism is: How can we impartially do the most good with the resources we've got? Because that decision matters for those we help. <a href="https://www.worldhappiness.report/ed/2025/giving-to-others-how-to-convert-your-money-into-greater-happiness-for-others/#distribution-of-cost-effectiveness">Sometimes by a factor of 100!</a></p>
 <p>Here are some of my favorite resources about Effective Altruism:</p>
@@ -226,12 +241,15 @@
   <li><a href="https://www.youtube.com/watch?v=VNbIKtGMoaA">Charity for Shrimps?</a> Ronny Chieng on The Daily Show</li>
   <li><a href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism">Introduction to Effective Altruism</a> from effectivealtruism.org</li>
 </ul>
-</section>
 </div>
+</div>
+</section>
 
 <section id="animals">
 <h2>Animals:</h2>
-<img class="section-photo" src="rob-and-dog.webp" alt="Me and my parents' dog" width="900" height="675">
+<div class="split photo-left">
+<img class="section-photo split-photo" src="rob-and-dog.webp" alt="Me and my parents' dog" width="900" height="675">
+<div class="split-text">
 <p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper (if you're viewing this on a laptop, that's roughly the size of your screen).</p>
 <p>Here are some of my favorite resources about factory farming:</p>
 <ul>
@@ -239,10 +257,14 @@
   <li><a href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future">Factory farming</a> problem profile from 80,000 Hours</li>
   <li><a href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism">Two Martians Crawl Into a Bar</a> by Silas Abrahamsen</li>
 </ul>
+</div>
+</div>
 </section>
 
 <section id="side">
 <h2>Ways to Get Into Contact With Me:</h2>
+<div class="split">
+<div class="split-text">
 <p>I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
 <ul id="contact-list">
   <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#1D9BF6" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>Email: <a href="mailto:robdpaine@icloud.com">robdpaine@icloud.com</a></li>
@@ -251,18 +273,17 @@
   <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#E4405F" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.3" cy="6.7" r="1" fill="#E4405F" stroke="none"/></svg>Instagram: <a href="https://instagram.com/robpaine4">@robpaine4</a></li>
   <li><svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6.5" cy="12" r="4.8" fill="#FF8000"/><circle cx="12" cy="12" r="4.8" fill="#00E054"/><circle cx="17.5" cy="12" r="4.8" fill="#40BCF4"/></svg>Letterboxd: <a href="https://letterboxd.com/robpaine4/">@robpaine4</a> (see what I've watched recently)</li>
 </ul>
-
-<figure id="long-hair">
+</div>
+<figure id="long-hair" class="split-photo">
   <img class="section-photo" src="rob-guitar.webp" alt="Me playing guitar on stage, with long hair" width="800" height="1200">
   <figcaption>I used to have long hair</figcaption>
 </figure>
+</div>
 </section>
 
 <section id="feedback">
 <h2>Leave Me Feedback Here!</h2>
-<ul>
-  <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
-</ul>
+<p><a href="https://www.admonymous.co/rob-paine">Admonymous</a></p>
 </section>
 
 </main>
