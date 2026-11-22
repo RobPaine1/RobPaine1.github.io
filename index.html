@@ -137,18 +137,18 @@
   /* Wide windows: four columns that fit one screen without scrolling.
      Everything is sized in rem and the root font size follows the window,
      so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1110px
-     breakpoint is the full 84rem layout (plus the page margin) at that
+     the text stops shrinking and the page scrolls instead. The 1125px
+     breakpoint is the full 85rem layout (plus the page margin) at that
      floor, so the columns are never squeezed narrower than designed. The
      column widths are tuned so the columns end up about the same height;
      re-measure them when the text changes. */
-  @media (min-width: 1110px) {
+  @media (min-width: 1125px) {
     html {
-      font-size: clamp(13px, min(1.148vw, 2.05vh), 22px);
+      font-size: clamp(13px, min(1.135vw, 2.02vh), 22px);
     }
     body {
       box-sizing: border-box;
-      max-width: 84rem;
+      max-width: 85rem;
       min-height: 100vh;
       padding: 0 1.25rem;
       display: flex;
@@ -158,7 +158,7 @@
        under the intro here, filling the short left column */
     #layout {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 36fr) minmax(0, 15.25fr) minmax(0, 15.25fr);
+      grid-template-columns: 14rem minmax(0, 36fr) minmax(0, 16.75fr) minmax(0, 15.25fr);
       grid-template-rows: auto 1fr;
       grid-template-areas:
         "top      about animals side"
@@ -235,7 +235,7 @@
 <section id="animals">
 <h2>Animals:</h2>
 <img class="section-photo" src="rob-and-dog.webp" alt="Me and my parents' dog" width="900" height="675">
-<p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper.</p>
+<p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper (if you're viewing this on a laptop that's roughly the size of your screen).</p>
 <p>Here are some of my favorite resources about factory farming:</p>
 <ul>
   <li><a href="https://www.youtube.com/watch?v=dvLnIecUNL8">How to End Factory Farming</a>, a TED talk by Lewis Bollard</li>
