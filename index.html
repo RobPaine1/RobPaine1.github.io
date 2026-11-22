@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://robpaine1.github.io/rob.jpg">
 <meta name="twitter:card" content="summary">
 <style>
-  /* The page content sits in a centered column, but text inside reads left-aligned */
+  /* Phones and narrow windows: one centered column that scrolls */
   body {
     max-width: 700px;
     margin: 0 auto;
@@ -23,8 +23,13 @@
   #top {
     text-align: center;
   }
-  /* Only the wombat gets styling — everything else stays default */
+  #top img {
+    max-width: 100%;
+    height: auto;
+  }
   #wombat-zone {
+    --wombat-w: 220px;
+    --hop: 35px;
     position: relative;
     height: 200px;
     margin-top: 60px;
@@ -41,6 +46,8 @@
   }
   #wombat-flip img {
     display: block;
+    width: var(--wombat-w);
+    height: auto;
     animation: hop 0.5s ease-in-out infinite;
   }
   /* Hovering the wombat (or its card) freezes everything mid-hop */
@@ -51,7 +58,7 @@
   }
   @keyframes roam {
     0%   { left: 0; }
-    50%  { left: calc(100% - 220px); }
+    50%  { left: calc(100% - var(--wombat-w)); }
     100% { left: 0; }
   }
   /* The wombat faces left, so flip it when it travels right */
@@ -61,25 +68,29 @@
   }
   @keyframes hop {
     0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-35px); }
+    50%      { transform: translateY(calc(-1 * var(--hop))); }
   }
   /* Wikipedia preview card, hidden until the wombat is hovered.
      The transparent padding-bottom bridges the gap so the mouse can
-     travel from wombat to card without the card vanishing. */
+     travel from wombat to card without the card vanishing.
+     It must be display: none while hidden: the card is wider than the
+     wombat, so a merely invisible card adds a horizontal scrollbar
+     whenever the wombat nears the right edge. */
   #wombat-card {
+    display: none;
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     padding-bottom: 10px;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.15s;
     z-index: 10;
   }
   #wombat-roam:hover #wombat-card {
-    visibility: visible;
-    opacity: 1;
+    display: block;
+    animation: card-in 0.15s;
+  }
+  @keyframes card-in {
+    from { opacity: 0; }
   }
   #wombat-card-inner {
     width: 300px;
@@ -109,24 +120,66 @@
     padding-left: 0;
   }
   #contact-list li {
-    margin: 8px 0;
+    margin: 0.5em 0;
   }
   .contact-icon {
-    width: 18px;
-    height: 18px;
-    vertical-align: -3px;
-    margin-right: 7px;
+    width: 1.125em;
+    height: 1.125em;
+    vertical-align: -0.19em;
+    margin-right: 0.44em;
+  }
+  /* Wide windows: three columns that fit one screen without scrolling.
+     Everything is sized in rem and the root font size follows the window,
+     so the layout keeps its proportions at any size. Below the 13px floor
+     the text stops shrinking and the page scrolls instead. The 1000px
+     breakpoint is the full 75rem layout at that floor, so the columns
+     are never squeezed narrower than designed. */
+  @media (min-width: 1000px) {
+    html {
+      font-size: clamp(13px, min(1.25vw, 2.3vh), 22px);
+    }
+    body {
+      box-sizing: border-box;
+      max-width: 75rem;
+      min-height: 100vh;
+      padding: 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+    #layout {
+      display: grid;
+      grid-template-columns: 14rem minmax(0, 1fr) 23rem;
+      column-gap: 2.5rem;
+      align-items: start;
+      margin: auto 0;
+    }
+    #top {
+      align-self: center;
+    }
+    #top img {
+      width: 12rem;
+    }
+    #wombat-zone {
+      --wombat-w: 8.5rem;
+      --hop: 1.3rem;
+      flex: none;
+      height: 7rem;
+      margin-top: 0;
+    }
   }
 </style>
 </head>
 <body>
 
-<div id="top">
+<main id="layout">
+
+<section id="top">
 <img src="rob-cutout.webp" alt="Photo of Rob" width="250" height="234">
 
 <h1>Hi! I'm Rob. This is my website.</h1>
-</div>
+</section>
 
+<section id="done">
 <h2>Things I Have Done:</h2>
 
 <h3>Job Board Associate for <a href="https://80000hours.org">80,000 Hours</a>, a nonprofit advising people who want to have high impact careers (currently focusing on risks from AI):</h3>
@@ -145,6 +198,9 @@
   <li>I organized weekly meetups and socials, including faculty guest speakers. I took care of a lot of marketing tasks like tabling, posters and social media. I also ran an Introductory Effective Altruism fellowship and contributed to our annual retreats.</li>
 </ul>
 
+</section>
+
+<section id="side">
 <h2>Ways to Get Into Contact With Me:</h2>
 <p>I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
 <ul id="contact-list">
@@ -167,6 +223,9 @@
 <ul>
   <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
 </ul>
+</section>
+
+</main>
 
 <div id="wombat-zone">
   <div id="wombat-roam">
