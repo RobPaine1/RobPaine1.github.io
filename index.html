@@ -128,35 +128,50 @@
     vertical-align: -0.19em;
     margin-right: 0.44em;
   }
-  /* Wide windows: three columns that fit one screen without scrolling.
+  /* Wide windows: four columns that fit one screen without scrolling.
      Everything is sized in rem and the root font size follows the window,
      so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1000px
-     breakpoint is the full 75rem layout at that floor, so the columns
+     the text stops shrinking and the page scrolls instead. The 1070px
+     breakpoint is the full 82rem layout at that floor, so the columns
      are never squeezed narrower than designed. The column widths are
      tuned so the columns end up about the same height; re-measure them
      when the text changes. */
-  @media (min-width: 1000px) {
+  @media (min-width: 1070px) {
     html {
-      font-size: clamp(13px, min(1.25vw, 2.25vh), 22px);
+      font-size: clamp(13px, min(1.175vw, 2.16vh), 22px);
     }
     body {
       box-sizing: border-box;
-      max-width: 75rem;
+      max-width: 82rem;
       min-height: 100vh;
       padding: 0 1.25rem;
       display: flex;
       flex-direction: column;
     }
+    /* The feedback link comes last in the page (and on phones) but sits
+       under the intro here, filling the short left column */
     #layout {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 1fr) 23rem;
-      column-gap: 2.5rem;
+      grid-template-columns: 14rem minmax(0, 29fr) minmax(0, 15.25fr) minmax(0, 15.25fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "top      about animals side"
+        "feedback about animals side";
+      column-gap: 2rem;
       align-items: start;
       margin: auto 0;
     }
-    #top {
-      align-self: center;
+    #top { grid-area: top; }
+    #about { grid-area: about; }
+    #animals { grid-area: animals; }
+    #side { grid-area: side; }
+    #feedback {
+      grid-area: feedback;
+      text-align: center;
+    }
+    #feedback ul {
+      list-style: none;
+      padding-left: 0;
     }
     #top img {
       width: 12rem;
@@ -207,6 +222,11 @@
 </section>
 </div>
 
+<section id="animals">
+<h2>Animals:</h2>
+<p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper.</p>
+</section>
+
 <section id="side">
 <h2>Ways to Get Into Contact With Me:</h2>
 <p>I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
@@ -225,7 +245,9 @@
   <li>Tottenham Hotspur</li>
   <li>Rock music</li>
 </ul>
+</section>
 
+<section id="feedback">
 <h2>Leave Me Feedback Here!</h2>
 <ul>
   <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
