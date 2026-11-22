@@ -28,6 +28,30 @@
   li {
     margin: 0.3em 0;
   }
+  /* Resource recommendations: a small preview image beside each link */
+  .resources {
+    list-style: none;
+    padding-left: 0;
+  }
+  .resources li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.75rem 0;
+  }
+  .resources .thumb {
+    flex: none;
+  }
+  .resources img {
+    display: block;
+    width: 7.5rem;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 4px;
+    outline: 1px solid rgba(0, 0, 0, 0.12);
+    outline-offset: -1px;
+  }
   /* Keep the photo and main greeting centered */
   #top {
     margin-top: 2.5rem;
@@ -221,10 +245,10 @@
 </ol>
 <p>I think this is very uncool of them. If it is possible to make AI systems that are smarter than humans in every way, we should not create them unless there is broad scientific consensus they will be safe.</p>
 <p>Here are some of my favorite resources on AI Safety:</p>
-<ul>
-  <li><a href="https://www.youtube.com/watch?v=xFYUo0ZmK-A">This might be the worst AI warning we get.</a> by AI In Context</li>
-  <li><a href="https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot">AI Safety Is Not A Corporate Plot</a> by Scott Alexander</li>
-  <li><a href="https://80000hours.org/problem-profiles/artificial-intelligence">Why AI risks are the world&rsquo;s most pressing problems</a> from 80,000 Hours</li>
+<ul class="resources">
+  <li><a class="thumb" href="https://www.youtube.com/watch?v=xFYUo0ZmK-A" tabindex="-1" aria-hidden="true"><img src="thumbs/yt-ai.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.youtube.com/watch?v=xFYUo0ZmK-A">This might be the worst AI warning we get.</a> by AI In Context</span></li>
+  <li><a class="thumb" href="https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot" tabindex="-1" aria-hidden="true"><img src="thumbs/acx.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot">AI Safety Is Not A Corporate Plot</a> by Scott Alexander</span></li>
+  <li><a class="thumb" href="https://80000hours.org/problem-profiles/artificial-intelligence" tabindex="-1" aria-hidden="true"><img src="thumbs/80k-ai.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://80000hours.org/problem-profiles/artificial-intelligence">Why AI risks are the world&rsquo;s most pressing problems</a> from 80,000 Hours</span></li>
 </ul>
 </section>
 
@@ -235,14 +259,14 @@
 <div class="split-text">
 <p>I'm quite involved in the Effective Altruism community. I co-organized <a href="https://www.eautexas.org/">UT Austin's Effective Altruism group</a> for two years and I briefly worked for <a href="https://www.nest-ea.org/">NEST</a> (The Network for EA Support and Training).</p>
 <p>For me the central question of Effective Altruism is: How can we impartially do the most good with the resources we've got? Because that decision matters for those we help. <a href="https://www.worldhappiness.report/ed/2025/giving-to-others-how-to-convert-your-money-into-greater-happiness-for-others/#distribution-of-cost-effectiveness">Sometimes by a factor of 100!</a></p>
+</div>
+</div>
 <p>Here are some of my favorite resources about Effective Altruism:</p>
-<ul>
-  <li><a href="https://blog.andymasley.com/p/what-i-get-out-of-effective-altruism">What I get out of effective altruism</a> by Andy Masley</li>
-  <li><a href="https://www.youtube.com/watch?v=VNbIKtGMoaA">Charity for Shrimps?</a> Ronny Chieng on The Daily Show</li>
-  <li><a href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism">Introduction to Effective Altruism</a> from effectivealtruism.org</li>
+<ul class="resources">
+  <li><a class="thumb" href="https://blog.andymasley.com/p/what-i-get-out-of-effective-altruism" tabindex="-1" aria-hidden="true"><img src="thumbs/masley.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://blog.andymasley.com/p/what-i-get-out-of-effective-altruism">What I get out of effective altruism</a> by Andy Masley</span></li>
+  <li><a class="thumb" href="https://www.youtube.com/watch?v=VNbIKtGMoaA" tabindex="-1" aria-hidden="true"><img src="thumbs/yt-shrimp.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.youtube.com/watch?v=VNbIKtGMoaA">Charity for Shrimps?</a> Ronny Chieng on The Daily Show</span></li>
+  <li><a class="thumb" href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism" tabindex="-1" aria-hidden="true"><img src="thumbs/ea-intro.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism">Introduction to Effective Altruism</a> from effectivealtruism.org</span></li>
 </ul>
-</div>
-</div>
 </section>
 
 <section id="animals">
@@ -251,14 +275,14 @@
 <img class="section-photo split-photo" src="rob-and-dog.webp" alt="Me and my parents' dog" width="900" height="675">
 <div class="split-text">
 <p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper (if you're viewing this on a laptop, that's roughly the size of your screen).</p>
+</div>
+</div>
 <p>Here are some of my favorite resources about factory farming:</p>
-<ul>
-  <li><a href="https://www.youtube.com/watch?v=dvLnIecUNL8">How to End Factory Farming</a>, a TED talk by Lewis Bollard</li>
-  <li><a href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future">Factory farming</a> problem profile from 80,000 Hours</li>
-  <li><a href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism">Two Martians Crawl Into a Bar</a> by Silas Abrahamsen</li>
+<ul class="resources">
+  <li><a class="thumb" href="https://www.youtube.com/watch?v=dvLnIecUNL8" tabindex="-1" aria-hidden="true"><img src="thumbs/yt-ted.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.youtube.com/watch?v=dvLnIecUNL8">How to End Factory Farming</a>, a TED talk by Lewis Bollard</span></li>
+  <li><a class="thumb" href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future" tabindex="-1" aria-hidden="true"><img src="thumbs/80k-ff.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future">Factory farming</a> problem profile from 80,000 Hours</span></li>
+  <li><a class="thumb" href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism" tabindex="-1" aria-hidden="true"><img src="thumbs/martians.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism">Two Martians Crawl Into a Bar</a> by Silas Abrahamsen</span></li>
 </ul>
-</div>
-</div>
 </section>
 
 <section id="side">
