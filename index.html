@@ -128,50 +128,35 @@
     vertical-align: -0.19em;
     margin-right: 0.44em;
   }
-  /* Wide windows: four columns that fit one screen without scrolling.
+  /* Wide windows: three columns that fit one screen without scrolling.
      Everything is sized in rem and the root font size follows the window,
      so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1040px
-     breakpoint is the full 80rem layout at that floor, so the columns
+     the text stops shrinking and the page scrolls instead. The 1000px
+     breakpoint is the full 75rem layout at that floor, so the columns
      are never squeezed narrower than designed. The column widths are
-     tuned so all four columns end up about the same height; re-measure
-     them when the text changes. */
-  @media (min-width: 1040px) {
+     tuned so the columns end up about the same height; re-measure them
+     when the text changes. */
+  @media (min-width: 1000px) {
     html {
-      font-size: clamp(13px, min(1.2vw, 2.27vh), 22px);
+      font-size: clamp(13px, min(1.25vw, 2.25vh), 22px);
     }
     body {
       box-sizing: border-box;
-      max-width: 80rem;
+      max-width: 75rem;
       min-height: 100vh;
       padding: 0 1.25rem;
       display: flex;
       flex-direction: column;
     }
-    /* The feedback link comes last in the page (and on phones) but sits
-       under the intro here, filling the short left column */
     #layout {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 25fr) minmax(0, 16.25fr) minmax(0, 16.25fr);
-      grid-template-rows: auto 1fr;
-      grid-template-areas:
-        "top      done ea side"
-        "feedback done ea side";
-      column-gap: 2rem;
+      grid-template-columns: 14rem minmax(0, 1fr) 23rem;
+      column-gap: 2.5rem;
       align-items: start;
       margin: auto 0;
     }
-    #top { grid-area: top; }
-    #done { grid-area: done; }
-    #ea { grid-area: ea; }
-    #side { grid-area: side; }
-    #feedback {
-      grid-area: feedback;
-      text-align: center;
-    }
-    #feedback ul {
-      list-style: none;
-      padding-left: 0;
+    #top {
+      align-self: center;
     }
     #top img {
       width: 12rem;
@@ -198,6 +183,7 @@
 <p>There's a lot to do! Check out the <a href="https://jobs.80000hours.org/">80k job board</a>.</p>
 </section>
 
+<div id="about">
 <section id="done">
 <h2>Things I Have Done:</h2>
 
@@ -206,17 +192,6 @@
   <li>I found new jobs and opportunities for the 80,000 Hours <a href="https://jobs.80000hours.org/">Job Board</a> on a weekly basis while maintaining sourcing automation pipelines. I also suggested and got through some product improvements.</li>
   <li>I filtered applicants for 80,000 Hours <a href="https://80000hours.org/speak-with-us/">Advising</a> in collaboration with the advising department.</li>
 </ul>
-
-<h3>Community building for <a href="https://www.nest-ea.org/">NEST</a> (Network for EA Support and Training):</h3>
-<ul>
-  <li>I helped universities in the DC area run their Effective Altruism groups, primarily Georgetown.</li>
-</ul>
-
-<h3>Co-organizing <a href="https://www.eautexas.org/">Effective Altruism at UT Austin</a>:</h3>
-<ul>
-  <li>I organized weekly meetups and socials, including faculty guest speakers. I took care of a lot of marketing tasks like tabling, posters and social media. I also ran an Introductory Effective Altruism fellowship and contributed to our annual retreats.</li>
-</ul>
-
 </section>
 
 <section id="ea">
@@ -230,6 +205,7 @@
   <li><a href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism">Introduction to Effective Altruism</a> from effectivealtruism.org</li>
 </ul>
 </section>
+</div>
 
 <section id="side">
 <h2>Ways to Get Into Contact With Me:</h2>
@@ -249,9 +225,7 @@
   <li>Tottenham Hotspur</li>
   <li>Rock music</li>
 </ul>
-</section>
 
-<section id="feedback">
 <h2>Leave Me Feedback Here!</h2>
 <ul>
   <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
