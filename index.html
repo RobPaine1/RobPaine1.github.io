@@ -128,33 +128,50 @@
     vertical-align: -0.19em;
     margin-right: 0.44em;
   }
-  /* Wide windows: three columns that fit one screen without scrolling.
+  /* Wide windows: four columns that fit one screen without scrolling.
      Everything is sized in rem and the root font size follows the window,
      so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1000px
-     breakpoint is the full 75rem layout at that floor, so the columns
-     are never squeezed narrower than designed. */
-  @media (min-width: 1000px) {
+     the text stops shrinking and the page scrolls instead. The 1040px
+     breakpoint is the full 80rem layout at that floor, so the columns
+     are never squeezed narrower than designed. The column widths are
+     tuned so all four columns end up about the same height; re-measure
+     them when the text changes. */
+  @media (min-width: 1040px) {
     html {
-      font-size: clamp(13px, min(1.25vw, 2.3vh), 22px);
+      font-size: clamp(13px, min(1.2vw, 2.27vh), 22px);
     }
     body {
       box-sizing: border-box;
-      max-width: 75rem;
+      max-width: 80rem;
       min-height: 100vh;
       padding: 0 1.25rem;
       display: flex;
       flex-direction: column;
     }
+    /* The feedback link comes last in the page (and on phones) but sits
+       under the intro here, filling the short left column */
     #layout {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 1fr) 23rem;
-      column-gap: 2.5rem;
+      grid-template-columns: 14rem minmax(0, 25fr) minmax(0, 16.25fr) minmax(0, 16.25fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "top      done ea side"
+        "feedback done ea side";
+      column-gap: 2rem;
       align-items: start;
       margin: auto 0;
     }
-    #top {
-      align-self: center;
+    #top { grid-area: top; }
+    #done { grid-area: done; }
+    #ea { grid-area: ea; }
+    #side { grid-area: side; }
+    #feedback {
+      grid-area: feedback;
+      text-align: center;
+    }
+    #feedback ul {
+      list-style: none;
+      padding-left: 0;
     }
     #top img {
       width: 12rem;
@@ -202,6 +219,18 @@
 
 </section>
 
+<section id="ea">
+<h2>Effective Altruism:</h2>
+<p>I'm quite involved in the Effective Altruism community. I co-organized <a href="https://www.eautexas.org/">UT Austin's Effective Altruism group</a> for two years and I briefly worked for <a href="https://www.nest-ea.org/">NEST</a> (The Network for EA Support and Training).</p>
+<p>For me the central question of Effective Altruism is: How can we impartially do the most good with the resources we've got? Because that decision matters for those we help. <a href="https://www.worldhappiness.report/ed/2025/giving-to-others-how-to-convert-your-money-into-greater-happiness-for-others/#distribution-of-cost-effectiveness">Sometimes by a factor of 100!</a></p>
+<p>Here are some of my favorite resources about Effective Altruism:</p>
+<ul>
+  <li><a href="https://blog.andymasley.com/p/what-i-get-out-of-effective-altruism">What I get out of effective altruism</a> by Andy Masley</li>
+  <li><a href="https://www.youtube.com/watch?v=VNbIKtGMoaA">Charity for Shrimps?</a> Ronny Chieng on The Daily Show</li>
+  <li><a href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism">Introduction to Effective Altruism</a> from effectivealtruism.org</li>
+</ul>
+</section>
+
 <section id="side">
 <h2>Ways to Get Into Contact With Me:</h2>
 <p>I have a pretty low bar for reaching out. I'm not Jeff Bezos and I like to help people with what I can.</p>
@@ -220,7 +249,9 @@
   <li>Tottenham Hotspur</li>
   <li>Rock music</li>
 </ul>
+</section>
 
+<section id="feedback">
 <h2>Leave Me Feedback Here!</h2>
 <ul>
   <li><a href="https://www.admonymous.co/rob-paine">Admonymous</a></li>
