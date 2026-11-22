@@ -301,6 +301,7 @@
   <a href="#ai-safety">AI Safety</a>
   <a href="#ea">Effective Altruism</a>
   <a href="#animals">Animals</a>
+  <a href="#blog">Blog</a>
   <a href="#contact">Contact</a>
   <a href="#feedback">Feedback</a>
 </nav>
@@ -351,6 +352,13 @@
   <li><a class="thumb" href="https://www.youtube.com/watch?v=dvLnIecUNL8" tabindex="-1" aria-hidden="true"><img src="thumbs/yt-ted.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://www.youtube.com/watch?v=dvLnIecUNL8">How to End Factory Farming</a>, a TED talk by Lewis Bollard</span></li>
   <li><a class="thumb" href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future" tabindex="-1" aria-hidden="true"><img src="thumbs/80k-ff.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://80000hours.org/problem-profiles/factory-farming/#factory-farming-future">Factory farming</a> problem profile from 80,000 Hours</span></li>
   <li><a class="thumb" href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism" tabindex="-1" aria-hidden="true"><img src="thumbs/martians.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="https://wonderandaporia.substack.com/p/a-dialogue-on-ethical-veganism">Two Martians Crawl Into a Bar</a> by Silas Abrahamsen</span></li>
+</ul>
+</section>
+
+<section id="blog">
+<h2>Blog:</h2>
+<ul class="resources">
+  <li><a class="thumb" href="blog/wombats-50-favorite-albums/" tabindex="-1" aria-hidden="true"><img src="thumbs/albums-post.webp" alt="" width="320" height="180" loading="lazy"></a><span><a href="blog/wombats-50-favorite-albums/">Wombat&rsquo;s 50 Favorite Albums</a></span></li>
 </ul>
 </section>
 
@@ -438,7 +446,7 @@
     return document.getElementById(a.getAttribute('href').slice(1));
   });
   function update() {
-    var line = window.innerHeight * 0.35, current = 0;
+    var line = 120, current = 0;
     sections.forEach(function (sec, i) {
       if (sec.getBoundingClientRect().top <= line) current = i;
     });
