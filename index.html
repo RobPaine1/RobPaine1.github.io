@@ -128,21 +128,27 @@
     vertical-align: -0.19em;
     margin-right: 0.44em;
   }
+  .section-photo {
+    display: block;
+    width: 100%;
+    max-width: 24rem;
+    height: auto;
+  }
   /* Wide windows: four columns that fit one screen without scrolling.
      Everything is sized in rem and the root font size follows the window,
      so the layout keeps its proportions at any size. Below the 13px floor
-     the text stops shrinking and the page scrolls instead. The 1070px
-     breakpoint is the full 82rem layout at that floor, so the columns
-     are never squeezed narrower than designed. The column widths are
-     tuned so the columns end up about the same height; re-measure them
-     when the text changes. */
-  @media (min-width: 1070px) {
+     the text stops shrinking and the page scrolls instead. The 1110px
+     breakpoint is the full 84rem layout (plus the page margin) at that
+     floor, so the columns are never squeezed narrower than designed. The
+     column widths are tuned so the columns end up about the same height;
+     re-measure them when the text changes. */
+  @media (min-width: 1110px) {
     html {
-      font-size: clamp(13px, min(1.175vw, 2.16vh), 22px);
+      font-size: clamp(13px, min(1.148vw, 2.05vh), 22px);
     }
     body {
       box-sizing: border-box;
-      max-width: 82rem;
+      max-width: 84rem;
       min-height: 100vh;
       padding: 0 1.25rem;
       display: flex;
@@ -152,7 +158,7 @@
        under the intro here, filling the short left column */
     #layout {
       display: grid;
-      grid-template-columns: 14rem minmax(0, 29fr) minmax(0, 15.25fr) minmax(0, 15.25fr);
+      grid-template-columns: 14rem minmax(0, 36fr) minmax(0, 15.25fr) minmax(0, 15.25fr);
       grid-template-rows: auto 1fr;
       grid-template-areas:
         "top      about animals side"
@@ -173,6 +179,9 @@
       list-style: none;
       padding-left: 0;
     }
+    /* The table photo sits beside the text so the tall middle column
+       doesn't grow by the photo's full height */
+    #ea .section-photo { float: right; width: 11rem; margin: 0.25rem 0 0.5rem 1rem; }
     #top img {
       width: 12rem;
     }
@@ -180,7 +189,7 @@
       --wombat-w: 8.5rem;
       --hop: 1.3rem;
       flex: none;
-      height: 7rem;
+      height: 6.8rem;
       margin-top: 0;
     }
   }
@@ -211,6 +220,7 @@
 
 <section id="ea">
 <h2>Effective Altruism:</h2>
+<img class="section-photo" src="ea-table.webp" alt="Me at the Effective Altruism table at UT Austin" width="760" height="757">
 <p>I'm quite involved in the Effective Altruism community. I co-organized <a href="https://www.eautexas.org/">UT Austin's Effective Altruism group</a> for two years and I briefly worked for <a href="https://www.nest-ea.org/">NEST</a> (The Network for EA Support and Training).</p>
 <p>For me the central question of Effective Altruism is: How can we impartially do the most good with the resources we've got? Because that decision matters for those we help. <a href="https://www.worldhappiness.report/ed/2025/giving-to-others-how-to-convert-your-money-into-greater-happiness-for-others/#distribution-of-cost-effectiveness">Sometimes by a factor of 100!</a></p>
 <p>Here are some of my favorite resources about Effective Altruism:</p>
@@ -224,6 +234,7 @@
 
 <section id="animals">
 <h2>Animals:</h2>
+<img class="section-photo" src="rob-and-dog.webp" alt="Me and my parents' dog" width="900" height="675">
 <p>I like animals and I think animal cruelty is bad, including inhumane practices on factory farms. This is why I'm vegan and why I believe modern animal farming is a moral catastrophe. Billions of chickens live in cages smaller than a sheet of paper.</p>
 <p>Here are some of my favorite resources about factory farming:</p>
 <ul>
