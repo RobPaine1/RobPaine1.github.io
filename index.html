@@ -189,6 +189,66 @@
   #feedback {
     text-align: center;
   }
+  /* Section links. On phones and narrow windows they are a centered row
+     under the intro; on wide windows they become a fixed sidebar in the
+     empty space left of the column (see the 1280px rule below). */
+  html {
+    scroll-behavior: smooth;
+  }
+  main > section {
+    scroll-margin-top: 1.5rem;
+  }
+  #page-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1.25rem;
+    margin-top: 2rem;
+  }
+  #page-nav a {
+    text-decoration: none;
+  }
+  #page-nav a:hover {
+    text-decoration: underline;
+  }
+  #page-nav a[href="#top"] {
+    display: none;
+  }
+  @media (min-width: 1280px) {
+    #page-nav {
+      position: fixed;
+      top: 50%;
+      left: max(1.25rem, calc(50% - 23rem - 11.5rem));
+      transform: translateY(-50%);
+      width: 9rem;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 0;
+      margin: 0;
+      font-size: 0.9rem;
+      border-left: 2px solid #ddd;
+    }
+    #page-nav a,
+    #page-nav a[href="#top"] {
+      display: block;
+      padding: 0.3rem 0 0.3rem 0.9rem;
+      margin-left: -2px;
+      border-left: 2px solid transparent;
+      color: #555;
+    }
+    #page-nav a:hover {
+      color: #000;
+      text-decoration: none;
+    }
+    #page-nav a.current {
+      color: #000;
+      font-weight: bold;
+      border-left-color: #000;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
   /* Wider windows: each section's photo sits beside its text, alternating
      sides down the page. On phones the photo stacks under the heading. */
   @media (min-width: 700px) {
@@ -215,10 +275,10 @@
     }
     .split.photo-left > .split-text { grid-column: 2; }
     .split.photo-left > .split-photo { grid-column: 1; }
-    #side .split {
+    #contact .split {
       grid-template-columns: minmax(0, 1fr) 13rem;
     }
-    #side .split > #long-hair {
+    #contact .split > #long-hair {
       margin-top: 0.3rem;
     }
   }
@@ -235,6 +295,15 @@
 <p>I work at <a href="https://80000hours.org">80,000 Hours</a>, where I help people find roles to make the world safer from the serious and urgent risks of advanced AI.</p>
 <p>There's a lot to do! Check out the <a href="https://jobs.80000hours.org/">80k job board</a>.</p>
 </section>
+
+<nav id="page-nav" aria-label="Sections">
+  <a href="#top">Top</a>
+  <a href="#ai-safety">AI Safety</a>
+  <a href="#ea">Effective Altruism</a>
+  <a href="#animals">Animals</a>
+  <a href="#contact">Contact</a>
+  <a href="#feedback">Feedback</a>
+</nav>
 
 <section id="ai-safety">
 <h2>AI Safety:</h2>
@@ -285,7 +354,7 @@
 </ul>
 </section>
 
-<section id="side">
+<section id="contact">
 <h2>Ways to Get Into Contact With Me:</h2>
 <div class="split">
 <div class="split-text">
@@ -358,6 +427,34 @@
     else if (rect.right > window.innerWidth - 8) shift = window.innerWidth - 8 - rect.right;
     if (shift) card.style.transform = 'translateX(calc(-50% + ' + shift + 'px))';
   });
+})();
+</script>
+
+<script>
+// Highlight the sidebar link for the section currently being read
+(function () {
+  var links = [].slice.call(document.querySelectorAll('#page-nav a'));
+  var sections = links.map(function (a) {
+    return document.getElementById(a.getAttribute('href').slice(1));
+  });
+  function update() {
+    var line = window.innerHeight * 0.35, current = 0;
+    sections.forEach(function (sec, i) {
+      if (sec.getBoundingClientRect().top <= line) current = i;
+    });
+    // At the very bottom the last section may be too short to reach the line
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = sections.length - 1;
+    }
+    links.forEach(function (a, i) {
+      a.classList.toggle('current', i === current);
+      if (i === current) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 </script>
 
